@@ -3,13 +3,15 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-   <home-swiper :urlImg = "urlImg" />
+    <home-swiper :banners="banners" />
+    <retcommend-view :recommends=" recommends" />
   </div>
 </template>
 
 <script>
 import NavBar from "components/common/navbar/NavBar";
-import HomeSwiper from "./childcomps/HomeSwiper"
+import HomeSwiper from "./childcomps/HomeSwiper";
+import RetcommendView from "./childcomps/RetcommendView";
 
 import { getHomeMultidata } from "network/home";
 
@@ -17,17 +19,20 @@ export default {
   name: "Home",
   components: {
     NavBar,
-    HomeSwiper
+    HomeSwiper,
+    RetcommendView
   },
   data() {
     return {
-      urlImg:[],
-    }
+      banners: [],
+      recommends:[]
+    };
   },
   created() {
     getHomeMultidata().then(res => {
       console.log(res);
-      this.urlImg = res.data.banner.list
+      this.banners = res.data.banner.list;
+      this.recommends = res.data.recommend.list
     });
   }
 };
