@@ -1,17 +1,16 @@
 <template>
-  <div id="home">
+  <div id="home" class="wrapper">
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <div class="wrapper">
-      <div class="content">
-        <home-swiper :banners="banners" />
-        <retcommend-view :recommends=" recommends" />
-        <feature-view />
-        <tab-control :titles="['流行','新款','精选']" class="tab-control" @tabclick="tabclick" />
-        <goods-list :goods="showGoods" />
-      </div>
-    </div>
+
+    <scroll class="content">
+      <home-swiper :banners="banners" />
+      <retcommend-view :recommends=" recommends" />
+      <feature-view />
+      <tab-control :titles="['流行','新款','精选']" class="tab-control" @tabclick="tabclick" />
+      <goods-list :goods="showGoods" />
+    </scroll>
   </div>
 </template>
 
@@ -24,7 +23,7 @@ import GoodsList from "components/content/goods/GoodsList";
 
 import TabControl from "components/content/tabcontrol/TabControl";
 
-import BSscroll from "better-scroll";
+import Scroll from "components/common/scroll/Scroll";
 
 import { getHomeMultidata, getHomeGoods } from "network/home";
 
@@ -36,7 +35,8 @@ export default {
     RetcommendView,
     FeatureView,
     TabControl,
-    GoodsList
+    GoodsList,
+    Scroll
   },
   data() {
     return {
@@ -92,9 +92,11 @@ export default {
 };
 </script>
 
-<style >
+<style scoped>
 #home {
   padding-top: 44px;
+  height: 100vh;
+  position: relative;
 }
 .home-nav {
   background-color: var(--color-tint);
@@ -110,4 +112,17 @@ export default {
   top: 44px;
   z-index: 9;
 }
+.content {
+  overflow: hidden;
+  position: absolute;
+  top: 44px;
+  bottom: 49px;
+  left:0;
+  right:0
+}
+/* .content {
+height: calc(100%-93px);
+overflow: hidden;
+margin-top: 44px;
+} */
 </style>
