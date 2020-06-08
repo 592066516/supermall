@@ -4,13 +4,14 @@
       <div slot="center">购物街</div>
     </nav-bar>
 
-    <scroll class="content">
+    <scroll class="content" ref="scroll">
       <home-swiper :banners="banners" />
       <retcommend-view :recommends=" recommends" />
       <feature-view />
       <tab-control :titles="['流行','新款','精选']" class="tab-control" @tabclick="tabclick" />
       <goods-list :goods="showGoods" />
     </scroll>
+    <back-top @click.native="backClick" />
   </div>
 </template>
 
@@ -24,6 +25,7 @@ import GoodsList from "components/content/goods/GoodsList";
 import TabControl from "components/content/tabcontrol/TabControl";
 
 import Scroll from "components/common/scroll/Scroll";
+import BackTop from "components/content/backtop/BackTop";
 
 import { getHomeMultidata, getHomeGoods } from "network/home";
 
@@ -36,7 +38,8 @@ export default {
     FeatureView,
     TabControl,
     GoodsList,
-    Scroll
+    Scroll,
+    BackTop
   },
   data() {
     return {
@@ -73,6 +76,11 @@ export default {
         case 2:
           this.currenttype = "sell";
       }
+    },
+    backClick() {
+      // this.$refs.scroll.scroll.scrollTo(0, 0,500);
+      this.$refs.scroll.scrollTo(0, 0,500);
+
     },
     getHomeMultidata() {
       getHomeMultidata().then(res => {
@@ -117,8 +125,8 @@ export default {
   position: absolute;
   top: 44px;
   bottom: 49px;
-  left:0;
-  right:0
+  left: 0;
+  right: 0;
 }
 /* .content {
 height: calc(100%-93px);
