@@ -22,7 +22,7 @@ export default {
 
   mounted() {
     this.scroll = new BScroll(this.$refs.wrapper, {});
-    this.scroll.scrollTo(0,0);
+    // this.scroll.scrollTo(0,0);
   }
 };
 </script>
