@@ -118,13 +118,13 @@ export default {
   },
   mounted() {
     this.scroll = new BSscroll(".wrapper", {
-      probeType:3,
+      probeType:this.probeType,
       pullUpLoad:true,
-      // click:true
+      click:true
     });
-    this.scroll.on('scroll',(position)=>{
-      // console.log(position);
-    })
+    // this.scroll.on('scroll',(position)=>{
+    //   console.log(position);
+    // })
     this.scroll.on('pullingUp',()=>{
       console.log('上拉加载更多');
     })
