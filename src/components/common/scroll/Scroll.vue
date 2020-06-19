@@ -13,6 +13,10 @@ export default {
     probeType:{
       type:Number,
       default:0
+    },
+    pullUpLoad:{
+      type:Boolean,
+      default:false
     }
   },
   data() {
@@ -24,19 +28,29 @@ export default {
     scrollTo(x, y, time = 300) {
       this.scroll.scrollTo(x, y, time);
     },
+    finishPullUp(){
+      this.scroll.finishPullUp()
+    }
     
   },
 
   mounted() {
     this.scroll = new BScroll(this.$refs.wrapper, {
       click:true,
-      probeType:this.probeType
+      probeType:this.probeType,
+      pullUpLoad:this.pullUpLoad
     });
     // this.scroll.scrollTo(0,0);
       this.scroll.on('scroll',(position)=>{
       // console.log(position);
-      this.$emit('scroll',position)
+       this.$emit('scroll',position)
     })
+    this.scroll.on('pullingUp',()=>{
+      // console.log('上拉加载更多');
+      this.$emit('pullingUp')
+      
+    })
+
   }
 };
 </script>
